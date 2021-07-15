@@ -1,11 +1,18 @@
 import collections
+import functools
 import itertools
+import operator
 import math
 
 
 def triangle(k: int) -> int:
     """ Return the kth triangle number. """ 
     return k * (k + 1) // 2
+
+
+def square_pyramid(k: int) -> int:
+    """ Return the kth square pyramidal number, 1² + 2² + ... + k² """
+    return k * (k + 1) * (2 * k + 1) // 6
 
 
 def lcm(a, b):
@@ -55,3 +62,15 @@ def prime_factorization(n: int):
         while n % p == 0:
             result[p] += 1
             n //= p
+
+
+def product(numbers):
+    return functools.reduce(operator.mul, numbers)
+
+
+def nwise(iterable, size):
+    tees = itertools.tee(iterable, size)
+    for i, sub in enumerate(tees):
+        next(itertools.islice(sub, i, i), None)
+
+    return zip(*tees)
